@@ -23,5 +23,5 @@ odoo-module-migrate
 ```
 - Ejecución
 ```
-
+odoo-module-migrate -d ./custom_addons/odoo-l10n-ecuador -m l10n_ec_base -i 17.0 -t 18.0 -fp
 ```
