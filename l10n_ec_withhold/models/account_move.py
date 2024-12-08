@@ -366,8 +366,8 @@ class AccountMove(models.Model):
         action["views"] = [(view_form_id, "form")]
         action["res_id"] = withhold_ids[0]
         if len(withhold_ids) > 1:
-            action["view_mode"] = "tree,form"
-            action["views"] = [(view_tree_id, "tree"), (view_form_id, "form")]
+            action["view_mode"] = "list,form"
+            action["views"] = [(view_tree_id, "list"), (view_form_id, "form")]
             action["domain"] = [("id", "in", withhold_ids)]
 
         return action
