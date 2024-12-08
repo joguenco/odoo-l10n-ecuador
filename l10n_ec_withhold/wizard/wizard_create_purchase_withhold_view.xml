@@ -26,7 +26,7 @@
                             colspan="4"
                             context="{'default_invoice_id': invoice_id}"
                         >
-                                <list editable="bottom">
+                                <tree editable="bottom">
                                     <field
                                     name="invoice_id"
                                     column_invisible="1"
@@ -54,7 +54,7 @@
                                     force_save="1"
                                 />
                                     <field name="withhold_amount" />
-                                </list>
+                                </tree>
                             </field>
                             <group class="oe_subtotal_footer oe_right">
                                 <field
