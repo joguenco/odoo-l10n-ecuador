@@ -1,27 +1,8 @@
+# Localización Odoo para Ecuador
 
-[![Runboat](https://img.shields.io/badge/runboat-Try%20me-875A7B.png)](https://runboat.odoo-community.org/builds?repo=OCA/l10n-ecuador&target_branch=18.0)
-[![Pre-commit Status](https://github.com/OCA/l10n-ecuador/actions/workflows/pre-commit.yml/badge.svg?branch=18.0)](https://github.com/OCA/l10n-ecuador/actions/workflows/pre-commit.yml?query=branch%3A18.0)
-[![Build Status](https://github.com/OCA/l10n-ecuador/actions/workflows/test.yml/badge.svg?branch=18.0)](https://github.com/OCA/l10n-ecuador/actions/workflows/test.yml?query=branch%3A18.0)
-[![codecov](https://codecov.io/gh/OCA/l10n-ecuador/branch/18.0/graph/badge.svg)](https://codecov.io/gh/OCA/l10n-ecuador)
-[![Translation Status](https://translation.odoo-community.org/widgets/l10n-ecuador-18-0/-/svg-badge.svg)](https://translation.odoo-community.org/engage/l10n-ecuador-18-0/?utm_source=widget)
+Esté repositorio está basado en https://github.com/OCA/l10n-ecuador, muchas gracias a los desarrolladores.
 
-<!-- /!\ do not modify above this line -->
-
-# l10n-ecuador
-
-l10n-ecuador
-
-<!-- /!\ do not modify below this line -->
-
-<!-- prettier-ignore-start -->
-
-[//]: # (addons)
-
-This part will be replaced when running the oca-gen-addons-table script from OCA/maintainer-tools.
-
-[//]: # (end addons)
-
-<!-- prettier-ignore-end -->
+El propósito de esté repositorio es hacer actualizaciones específicas que no se pueden añadir en el repositorio principal, añadir recursos de desarrollo y funciones adicionales.
 
 ## Licenses
 
