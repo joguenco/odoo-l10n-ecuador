@@ -4,11 +4,11 @@ virtualenv venv
 ```
 or
 ```
-virtualenv -p python3.11 venv
+virtualenv -p python3.12 venv
 ```
 or
 ```
-python3.11 -m venv venv
+python3.12 -m venv venv
 ```
 ## Activate python virtual environment
 ```
@@ -34,7 +34,7 @@ ruff format .
 ```
 ## Install dependencies
 ```
-pip install cryptography==36.0.2
+pip install git+https://github.com/joguenco/xades-bes-sri@0.1.0
 ```
 ```
 pip install -r requirements.txt
@@ -42,4 +42,8 @@ pip install -r requirements.txt
 ## Run app
 ```
 python src/__main__.py
+```
+## Generate requirements.txt
+```
+pip freeze > requirements.txt
 ```

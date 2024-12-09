@@ -1,0 +1,150 @@
+<?xml version='1.0' encoding='utf-8'?>
+<factura xmlns:ns0="http://www.w3.org/2000/09/xmldsig#" xmlns:ns1="http://uri.etsi.org/01903/v1.3.2#" id="comprobante" version="1.0.0">
+    <infoTributaria>
+        <ambiente>1</ambiente>
+        <tipoEmision>1</tipoEmision>
+        <razonSocial>Jorge Luis</razonSocial>
+        <nombreComercial>Ideas en Binario</nombreComercial>
+        <ruc>1234567890001</ruc>
+        <claveAcceso>0301202301123456789000110010030000000071234567811</claveAcceso>
+        <codDoc>01</codDoc>
+        <estab>001</estab>
+        <ptoEmi>003</ptoEmi>
+        <secuencial>000000007</secuencial>
+        <dirMatriz>Ecuador</dirMatriz>
+    </infoTributaria>
+    <infoFactura>
+        <fechaEmision>03/01/2023</fechaEmision>
+        <dirEstablecimiento>Ecuador</dirEstablecimiento>
+        <obligadoContabilidad>NO</obligadoContabilidad>
+        <tipoIdentificacionComprador>07</tipoIdentificacionComprador>
+        <razonSocialComprador>CONSUMIDOR FINAL</razonSocialComprador>
+        <identificacionComprador>9999999999999</identificacionComprador>
+        <totalSinImpuestos>10.00</totalSinImpuestos>
+        <totalDescuento>0.00</totalDescuento>
+        <totalConImpuestos>
+            <totalImpuesto>
+                <codigo>2</codigo>
+                <codigoPorcentaje>2</codigoPorcentaje>
+                <baseImponible>10.00</baseImponible>
+                <tarifa>12.00</tarifa>
+                <valor>1.20</valor>
+            </totalImpuesto>
+        </totalConImpuestos>
+        <propina>0.00</propina>
+        <importeTotal>11.20</importeTotal>
+        <moneda>DOLAR</moneda>
+        <pagos>
+            <pago>
+                <formaPago>01</formaPago>
+                <total>11.20</total>
+            </pago>
+        </pagos>
+    </infoFactura>
+    <detalles>
+        <detalle>
+            <codigoPrincipal>3</codigoPrincipal>
+            <descripcion>NORMAL CON IVA</descripcion>
+            <cantidad>1</cantidad>
+            <precioUnitario>10</precioUnitario>
+            <descuento>0</descuento>
+            <precioTotalSinImpuesto>10.00</precioTotalSinImpuesto>
+            <impuestos>
+                <impuesto>
+                    <codigo>2</codigo>
+                    <codigoPorcentaje>2</codigoPorcentaje>
+                    <tarifa>12.00</tarifa>
+                    <baseImponible>10.00</baseImponible>
+                    <valor>1.20</valor>
+                </impuesto>
+            </impuestos>
+        </detalle>
+    </detalles>
+
+    <ns0:Signature Id="Signature877574">
+        
+        <ns0:SignedInfo Id="Signature-SignedInfo546253">
+            <ns0:CanonicalizationMethod Algorithm="http://www.w3.org/TR/2001/REC-xml-c14n-20010315" />
+            <ns0:SignatureMethod Algorithm="http://www.w3.org/2000/09/xmldsig#rsa-sha1" />
+            <ns0:Reference Id="SignedPropertiesID708538" Type="http://uri.etsi.org/01903#SignedProperties" URI="#Signature877574-SignedProperties529734">
+                <ns0:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
+                <ns0:DigestValue>jAcPUaF0oLBjegsjw2UnOsWcLww=</ns0:DigestValue>
+            </ns0:Reference>
+            <ns0:Reference URI="#Certificate374698">
+                <ns0:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
+                <ns0:DigestValue>zQihEUpixdpEVWGKfh/8gFXYm3k=</ns0:DigestValue>
+            </ns0:Reference>
+            <ns0:Reference Id="Reference-ID-961039" URI="#comprobante">
+                <ns0:Transforms>
+                    <ns0:Transform Algorithm="http://www.w3.org/2000/09/xmldsig#enveloped-signature" />
+                </ns0:Transforms>
+                <ns0:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
+                <ns0:DigestValue>PH86vpyW4uW6/Rim5WwSoTXI+JQ=</ns0:DigestValue>
+            </ns0:Reference>
+        </ns0:SignedInfo>
+    
+        <ns0:SignatureValue>
+            GgPh+qgSMGHSmljGcW5pEUDa8ZENo6U5qJfjU8qDs8Ltc88Ssfw81W50SFBytams1yh4xJxwE7ws
+243Ti1eCdp8jkpSdIuaS7LTN/ziHEOZjVHBQ7DA2TuTFx6wnuglMMbSWJmnOkwmVefbu9uP5HQM/
+cZuVwSBqKY/qMC4ROS0ENofPWzhQblfZ50quOFN9Ayk8jp5RA7bs1VS+NcQeDgp/beVfNTChqSlo
+32MJQG3a6xYqgJ48k5uRsj32Ya/dAtUly+GfU2X1nXz979r0QZ6NkbKyAdb/Ppj8yH/nFATP+00n
+PmV3hKTnKCPSQcDMhJyDpmBwSFhE9nLeY7lDKA==
+        </ns0:SignatureValue>
+        
+    <ns0:KeyInfo Id="Certificate374698">
+        <ns0:X509Data>
+            <ns0:X509Certificate>
+                
+MIIC8zCCAdugAwIBAgIIeNiActkz6B8wDQYJKoZIhvcNAQELBQAwFTETMBEGA1UE
+AxMKSm9yZ2
+UgTHVpczAeFw0yMzAxMDMyMzU2MDNaFw0yNjAxMDIyMzU2MDNaMBEx
+DzANBgNVBAMTBkhhY2tlc
+jCCASIwDQYJKoZIhvcNAQEBBQADggEPADCCAQoCggEB
+AL1gTj55l1uMio25oGwTAP2tJ0Qsm9JU
+QvksKcwyj9ml0PHCfTGb+QqWVBHjL7I9
+mZgF0jz9AI97C7CWFFEsBIQQeg9gKXRCm6GLCHx2iez
+N+ghMpEq8rOuuRKUEQKAb
+33JRHgkcjxtorw+vBL+mihtGRnLSz5y5FYVjJ6BdwmMP6+VB4beoGp
+y0rFUMNaq1
+BD03PW1gRDCLXPMkb1ymmYgPDDZLz4VJLbSqAPbhGdTv8Bl3VNE8osZmz6EWNmdV
+
+TH5SpU2YczCcCmUNnYZwxD0iblFdqgq38gAGFrwquakJUWoqK/CtWZd61vaDaaLM
+5wQzRg6Wdbf
+6pfoPhMkp9K8CAwEAAaNLMEkwHwYDVR0jBBgwFoAU2NpPOrYdALVM
+ziIMNbBGU9WIJBMwEQYDVR
+0RBAowCIIGSGFja2VyMBMGA1UdJQQMMAoGCCsGAQUF
+BwMCMA0GCSqGSIb3DQEBCwUAA4IBAQA6Q
+B+cbeSbB288/+8UNy3FZ9UGscXeXod0
+X17NoX1oPIMB2MToI1JO6nKYCrMCneubMadVPEdroKxn
+NV9zpCYsnehmhHSV3vZJ
+X13sy4Xm7uw3uvvyQX0DZJNkmBQ7jazhDUGChuxSzkVg37f/4cBoPpU
+D7axj3qko
+5hC3du1RVh9qyRKt53XoikYu42m5bB73TA6bijCj7PwKxMSE+K3IzCWCWK/FLrmS
+o
+fQ68WJw+StxgCAuhhWoBQZaCXB9zgkdb27QLXPN16ogR+wkzKecY+jPfMEfCKa/
+pWr4EUWCbXT7
+RetG9fN1nOBrQ2Stf1Fy+L7kfBAa9SxaxEhm1Yh7
+
+            </ns0:X509Certificate>
+        </ns0:X509Data>
+        <ns0:KeyValue>
+            <ns0:RSAKeyValue>
+                <ns0:Modulus>
+                    vWBOPnmXW4yKjbmgbBMA/a0nRCyb0lRC+SwpzDKP2aXQ8cJ9MZv5CpZUEeMvsj2ZmAXSPP0Aj3sL
+sJYUUSwEhBB6D2ApdEKboYsIfHaJ7M36CEykSrys665EpQRAoBvfclEeCRyPG2ivD68Ev6aKG0ZG
+ctLPnLkVhWMnoF3CYw/r5UHht6ganLSsVQw1qrUEPTc9bWBEMItc8yRvXKaZiA8MNkvPhUkttKoA
+9uEZ1O/wGXdU0TyixmbPoRY2Z1VMflKlTZhzMJwKZQ2dhnDEPSJuUV2qCrfyAAYWvCq5qQlRaior
+8K1Zl3rW9oNposznBDNGDpZ1t/ql+g+EySn0rw==
+                </ns0:Modulus>
+                <ns0:Exponent>AQAB</ns0:Exponent>
+            </ns0:RSAKeyValue>
+        </ns0:KeyValue>
+    </ns0:KeyInfo>
+    
+        <ns0:Object Id="Signature877574-Object828678">
+            <ns1:QualifyingProperties Target="#Signature877574">
+                <ns1:SignedProperties Id="Signature877574-SignedProperties529734"><ns1:SignedSignatureProperties><ns1:SigningTime>2024-12-08T22:55:24Z</ns1:SigningTime><ns1:SigningCertificate><ns1:Cert><ns1:CertDigest><ns0:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" /><ns0:DigestValue>5Mrs5+JefcWpkJO+Wb6v82CNZeQ=</ns0:DigestValue></ns1:CertDigest><ns1:IssuerSerial><ns0:X509IssuerName /><ns0:X509SerialNumber>8707851110279538719</ns0:X509SerialNumber></ns1:IssuerSerial></ns1:Cert></ns1:SigningCertificate></ns1:SignedSignatureProperties><ns1:SignedDataObjectProperties><ns1:DataObjectFormat ObjectReference="#Reference-ID-961039"><ns1:Description>contenido comprobante</ns1:Description><ns1:MimeType>text/xml</ns1:MimeType></ns1:DataObjectFormat></ns1:SignedDataObjectProperties></ns1:SignedProperties>
+            </ns1:QualifyingProperties>
+        </ns0:Object>
+    </ns0:Signature>
+</factura>
