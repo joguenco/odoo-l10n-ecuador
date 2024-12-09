@@ -9,7 +9,7 @@
     "version": "17.0.1.1.1",
     "depends": ["account", "account_edi", "l10n_ec", "l10n_ec_base"],
     "external_dependencies": {
-        "python": ["cryptography==36.0.0", "xmlsig==0.1.9", "xades==0.2.4", "zeep"]
+        "python": ["pyOpenSSL==24.0.0", "xmlsig==0.1.9", "xades==0.2.4", "zeep"]
     },
     "data": [
         "security/ir.model.access.csv",
