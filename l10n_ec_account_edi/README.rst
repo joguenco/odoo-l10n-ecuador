@@ -105,9 +105,9 @@ essential steps:
 
 4. **General Settings:**
 
-   -  In the Odoo settings for electronic invoicing, select the uploaded
-      electronic signature and specify the environment (testing or
-      production) for accurate invoice generation and submission.
+   - In the Odoo settings for electronic invoicing, select the uploaded
+     electronic signature and specify the environment (testing or
+     production) for accurate invoice generation and submission.
 
 By completing these configurations, your Odoo instance with the
 ``l10n_ec_account_edi`` module will be well-prepared for Electronic

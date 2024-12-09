@@ -10,7 +10,7 @@ extend-select = [
     "I",  # isort
     "UP",  # pyupgrade
 ]
-exclude = ["setup/*"]
+exclude = ["setup/*", "resources/*"]
 
 [format]
 exclude = ["setup/*", "resources/*"]
