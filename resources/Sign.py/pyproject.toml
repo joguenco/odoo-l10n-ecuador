@@ -1,0 +1,7 @@
+[tool.ruff]
+line-length = 90
+
+[tool.ruff.format]
+quote-style = "single"
+indent-style = "space"
+
