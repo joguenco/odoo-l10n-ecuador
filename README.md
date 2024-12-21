@@ -4,6 +4,11 @@ Esté repositorio está basado en https://github.com/OCA/l10n-ecuador, muchas gr
 
 El propósito de esté repositorio es hacer actualizaciones específicas que no se pueden añadir en el repositorio principal, añadir recursos de desarrollo y funciones adicionales.
 
+## Dependencias recomendadas
+```
+pip install phonenumbers
+```
+
 ## Licenses
 
 This repository is licensed under [AGPL-3.0](LICENSE).
