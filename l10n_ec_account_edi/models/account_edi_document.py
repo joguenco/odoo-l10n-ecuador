@@ -679,7 +679,11 @@ class AccountEdiDocument(models.Model):
                 {"l10n_ec_authorization_date": l10n_ec_authorization_date.strftime(DTF)}
             )
             break
-        return is_auth, msj_list, l10n_ec_authorization_date.strftime(DTF)
+
+        if l10n_ec_authorization_date:
+            return is_auth, msj_list, l10n_ec_authorization_date.strftime(DTF)
+
+        return is_auth, msj_list, l10n_ec_authorization_date
 
     def _l10n_ec_get_info_debit_note(self, xml_access_key: str):
         self.ensure_one()
