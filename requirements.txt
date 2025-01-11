@@ -1,0 +1,4 @@
+# generated from manifests external_dependencies
+pyOpenSSL==24.0.0
+xades==0.2.4
+xmlsig==0.1.9
