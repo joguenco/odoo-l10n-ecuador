@@ -313,7 +313,7 @@ class AccountMove(models.Model):
                 ):
                     if float_compare(line.quantity, 0.0, precision_digits=2) <= 0:
                         product_not_quantity.append(
-                            "  - %s" % line.product_id.display_name
+                            f"  - {line.product_id.display_name}"
                         )
                 if product_not_quantity:
                     error_list.append(
