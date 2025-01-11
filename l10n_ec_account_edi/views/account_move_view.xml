@@ -122,7 +122,6 @@
                     name="invisible"
                 >state != 'posted' or is_being_sent or invoice_pdf_report_id</attribute>
             </xpath>
-
         </field>
     </record>
     <record
@@ -225,5 +224,4 @@
         sequence="6"
         parent="account.menu_finance_receivables"
     />
-
 </odoo>

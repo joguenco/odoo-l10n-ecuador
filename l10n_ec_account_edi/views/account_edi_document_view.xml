@@ -53,10 +53,12 @@
                 <sheet>
                     <div class="oe_title">
                         <span class="o_form_label">XML Electronic Document</span>
-                            <h1 class="mt0">
-                                <span><field name="l10n_ec_document_number" /></span>
-                            </h1>
-                        </div>
+                        <h1 class="mt0">
+                            <span>
+                                <field name="l10n_ec_document_number" />
+                            </span>
+                        </h1>
+                    </div>
                     <group>
                         <field name="l10n_ec_xml_access_key" />
                         <field name="move_id" string="Related Document" />
@@ -88,5 +90,4 @@
         parent="l10n_ec.sri_menu"
         action="account_edi_document_action"
     />
-
 </odoo>

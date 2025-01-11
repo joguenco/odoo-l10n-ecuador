@@ -26,11 +26,10 @@ KEY_TO_PEM_CMD = (
 
 def convert_key_cer_to_pem(key, password):
     # TODO compute it from a python way
-    with NamedTemporaryFile(
-        "wb", suffix=".key", prefix="edi.ec.tmp."
-    ) as key_file, NamedTemporaryFile(
-        "rb", suffix=".key", prefix="edi.ec.tmp."
-    ) as keypem_file:
+    with (
+        NamedTemporaryFile("wb", suffix=".key", prefix="edi.ec.tmp.") as key_file,
+        NamedTemporaryFile("rb", suffix=".key", prefix="edi.ec.tmp.") as keypem_file,
+    ):
         key_file.write(key)
         key_file.flush()
         command = KEY_TO_PEM_CMD % (key_file.name, keypem_file.name, password, password)
