@@ -1,5 +1,4 @@
-from odoo.tests import tagged
-from odoo.tests.common import Form
+from odoo.tests import Form, tagged
 
 from odoo.addons.account.tests.common import AccountTestInvoicingCommon
 
@@ -7,10 +6,9 @@ from odoo.addons.account.tests.common import AccountTestInvoicingCommon
 @tagged("post_install", "-at_install")
 class TestAccountPayment(AccountTestInvoicingCommon):
     @classmethod
-    def setUpClass(cls, chart_template_ref=None):
-        chart_template_ref = "ec"
-        super().setUpClass(chart_template_ref=chart_template_ref)
-        cls.env.company.country_id = cls.env.ref("base.ec")
+    @AccountTestInvoicingCommon.setup_country("ec")
+    def setUpClass(cls):
+        super().setUpClass()
 
     def test_payment_journal(self):
         default_sri_payment = self.env.ref("l10n_ec.P1")
