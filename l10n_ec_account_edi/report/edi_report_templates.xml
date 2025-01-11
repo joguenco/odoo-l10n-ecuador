@@ -235,6 +235,7 @@
     </template>
     <template id="electronic_report_common_total_info">
         <table class="table table-sm table-bordered-black small">
+            <t t-set="currency" t-value="o.currency_id" />
             <t t-set="tax_totals" t-value="o.tax_totals" />
             <t t-call="account.document_tax_totals" />
         </table>

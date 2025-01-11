@@ -92,7 +92,7 @@ class AccountEdiDocument(models.Model):
 
     @api.model
     def _l10n_ec_prepare_tax_vals_edi(self, tax_data):
-        tax = tax_data["tax"]
+        tax = tax_data["grouping_key"]
         base_amount = tax_data.get("base_amount_currency", 0.0)
         tax_amount = tax_data.get("tax_amount_currency", 0.0)
         rate = tax.amount
