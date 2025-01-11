@@ -244,7 +244,7 @@ class AccountMove(models.Model):
     def _l10n_ec_get_taxes_grouped_by_tax_group(self, exclude_withholding=True):
         self.ensure_one()
 
-        def filter_withholding_taxes(base_line, tax_values):
+        def filter_withholding_taxes(base_line, tax_data):
             withhold_group_ids = (
                 self.env["account.tax.group"]
                 .search(
@@ -263,10 +263,10 @@ class AccountMove(models.Model):
                 )
                 .ids
             )
-            return (
-                tax_values["tax_repartition_line"].tax_id.tax_group_id.id
-                not in withhold_group_ids
-            )
+
+            tax = tax_data["tax"]
+
+            return tax not in withhold_group_ids
 
         taxes_data = self._prepare_edi_tax_details(
             filter_to_apply=exclude_withholding and filter_withholding_taxes or None,
@@ -313,7 +313,7 @@ class AccountMove(models.Model):
                 ):
                     if float_compare(line.quantity, 0.0, precision_digits=2) <= 0:
                         product_not_quantity.append(
-                            "  - %s" % line.product_id.display_name
+                            f"  - {line.product_id.display_name}"
                         )
                 if product_not_quantity:
                     error_list.append(
@@ -391,25 +391,8 @@ class AccountMove(models.Model):
 
         return response
 
-    def action_send_and_print(self):
-        if any(x._is_l10n_ec_is_purchase_liquidation() for x in self):
-            template = self.env.ref(self._get_mail_template(), raise_if_not_found=False)
-            return {
-                "name": _("Send"),
-                "type": "ir.actions.act_window",
-                "view_type": "form",
-                "view_mode": "form",
-                "res_model": "account.move.send",
-                "target": "new",
-                "context": {
-                    "active_ids": self.ids,
-                    "default_mail_template_id": template.id,
-                },
-            }
-        return super().action_send_and_print()
-
     def l10n_ec_send_email(self):
-        WizardInvoiceSent = self.env["account.move.send"]
+        WizardInvoiceSent = self.env["account.move.send.wizard"]
         self.ensure_one()
         res = self.with_context(discard_logo_check=True).action_invoice_sent()
         context = res["context"]
