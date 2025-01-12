@@ -244,7 +244,7 @@ class AccountMove(models.Model):
     def _l10n_ec_get_taxes_grouped_by_tax_group(self, exclude_withholding=True):
         self.ensure_one()
 
-        def filter_withholding_taxes(base_line, tax_values):
+        def filter_withholding_taxes(base_line, tax_data):
             withhold_group_ids = (
                 self.env["account.tax.group"]
                 .search(
@@ -263,10 +263,10 @@ class AccountMove(models.Model):
                 )
                 .ids
             )
-            return (
-                tax_values["tax_repartition_line"].tax_id.tax_group_id.id
-                not in withhold_group_ids
-            )
+
+            tax = tax_data["tax"]
+
+            return tax not in withhold_group_ids
 
         taxes_data = self._prepare_edi_tax_details(
             filter_to_apply=exclude_withholding and filter_withholding_taxes or None,
