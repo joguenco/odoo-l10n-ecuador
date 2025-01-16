@@ -409,7 +409,7 @@ class AccountMove(models.Model):
         return super().action_send_and_print()
 
     def l10n_ec_send_email(self):
-        WizardInvoiceSent = self.env["account.move.send"]
+        WizardInvoiceSent = self.env["account.move.send.wizard"]
         self.ensure_one()
         res = self.with_context(discard_logo_check=True).action_invoice_sent()
         context = res["context"]
