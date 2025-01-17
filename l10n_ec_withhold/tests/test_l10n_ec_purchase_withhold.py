@@ -12,14 +12,11 @@ from odoo.addons.l10n_ec_account_edi.tests.sri_response import patch_service_sri
 from odoo.addons.l10n_ec_account_edi.tests.test_edi_common import TestL10nECEdiCommon
 
 
-@tagged("post_install_l10n", "post_install", "-at_install")
+@tagged("post_install_l10n", "post_install", "-at_install", "purchase_withhold")
 class TestL10nPurchaseWithhold(TestL10nECEdiCommon):
     @classmethod
-    def setUpClass(
-        cls,
-        chart_template_ref="ec",
-    ):
-        super().setUpClass(chart_template_ref=chart_template_ref)
+    def setUpClass(cls):
+        super().setUpClass()
         cls.WizardWithhold = cls.env["l10n_ec.wizard.create.purchase.withhold"]
         cls.position_no_withhold = cls.env["account.fiscal.position"].create(
             {"name": "Withhold", "l10n_ec_avoid_withhold": True}

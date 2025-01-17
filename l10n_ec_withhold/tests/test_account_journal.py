@@ -1,10 +1,9 @@
-from odoo.tests import common
-from odoo.tests.common import Form
+from odoo.tests import Form, common
 
 
 class TestAccountJournal(common.TransactionCase):
     def test_l10n_ec_withholding(self):
-        self.env.user.company_id = self.env.ref("l10n_ec.demo_company_ec")
+        self.env.user.company_id = self.env.ref("base.demo_company_ec")
         journal_form = Form(self.env["account.journal"])
         journal_form.name = "Purchase Withholding"
         journal_form.code = "PUR-WH"
