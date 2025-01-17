@@ -23,6 +23,12 @@ This part will be replaced when running the oca-gen-addons-table script from OCA
 
 <!-- prettier-ignore-end -->
 
+## Additional Dependencies
+```
+pip install rlpycairo
+pip install phonenumbers
+```
+
 ## Licenses
 
 This repository is licensed under [AGPL-3.0](LICENSE).
