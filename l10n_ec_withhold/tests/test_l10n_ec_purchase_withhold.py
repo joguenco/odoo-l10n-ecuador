@@ -222,7 +222,7 @@ class TestL10nPurchaseWithhold(TestL10nECEdiCommon):
         report_action = withhold.with_context(
             discard_logo_check=True
         ).action_invoice_sent()
-        WizardMoveSend = self.env["account.move.send"].with_context(
+        WizardMoveSend = self.env["account.move.send.wizard"].with_context(
             active_model=withhold._name, **report_action["context"]
         )
         WizardMoveSend.create({}).action_send_and_print()

@@ -12,9 +12,7 @@ from odoo.addons.l10n_ec_account_edi.tests.test_edi_common import TestL10nECEdiC
 @tagged("post_install_l10n", "post_install", "-at_install", "sale_withhold")
 class TestL10nSaleWithhold(TestL10nECEdiCommon):
     @classmethod
-    def setUpClass(
-        cls,
-    ):
+    def setUpClass(cls):
         super().setUpClass()
         cls.WizardWithhold = cls.env["l10n_ec.wizard.create.sale.withhold"]
         cls.position_no_withhold = cls.env["account.fiscal.position"].create(
