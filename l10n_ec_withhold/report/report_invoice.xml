@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <odoo>
-
     <template
         id="report_withhold_document_ec"
         inherit_id="l10n_ec_account_edi.report_invoice_document"
