@@ -391,6 +391,25 @@ class AccountMove(models.Model):
 
         return response
 
+    def action_send_and_print(self):
+        if any(x._is_l10n_ec_is_purchase_liquidation() for x in self):
+            template = self._get_mail_template()
+            return {
+                "name": _("Send"),
+                "type": "ir.actions.act_window",
+                "view_type": "form",
+                "view_mode": "form",
+                "res_model": "account.move.send.wizard"
+                if len(self) == 1
+                else "account.move.send.batch.wizard",
+                "target": "new",
+                "context": {
+                    "active_ids": self.ids,
+                    "default_mail_template_id": template.id,
+                },
+            }
+        return super().action_send_and_print()
+
     def l10n_ec_send_email(self):
         WizardInvoiceSent = self.env["account.move.send.wizard"]
         self.ensure_one()

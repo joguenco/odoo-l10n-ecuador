@@ -6,3 +6,4 @@ from . import sri_key_type
 from . import res_company
 from . import res_config_settings
 from . import additional_information
+from . import account_move_send
