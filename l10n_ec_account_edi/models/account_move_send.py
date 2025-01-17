@@ -1,5 +1,6 @@
 from odoo import api, models
 
+
 class AccountMoveSend(models.AbstractModel):
     _inherit = "account.move.send"
 
