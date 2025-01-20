@@ -27,6 +27,9 @@ else
 
   pip install -r requirements.txt
 
+  pip install rlpycairo
+  pip install phonenumbers
+
   pip install -e ./
 
   odoo --version
