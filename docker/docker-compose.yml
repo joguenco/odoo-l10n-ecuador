@@ -1,0 +1,19 @@
+version: "3.7"
+
+services:
+  web:
+    build:
+      context: ./
+      dockerfile: Dockerfile
+    restart: always
+    image: demo_odoo_18
+    container_name: demo_odoo_18
+    network_mode: bridge
+    ports:
+      - "8069:8069"
+    environment:
+      HOST: "host.docker.internal"
+      USER: "demo_odoo_18"
+      PASSWORD: "o"
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
