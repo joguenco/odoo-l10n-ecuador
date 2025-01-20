@@ -54,6 +54,7 @@ RUN apt-get update && \
         libcairo2-dev \
         libjpeg-dev \
         libgif-dev \
+        vim \
         postgresql-client && \
     if [ -z "${TARGETARCH}" ]; then \
         TARGETARCH="$(dpkg --print-architecture)"; \
@@ -82,6 +83,8 @@ RUN cd /opt/odoo/server && pip3 install -r requirements.txt
 RUN pip3 install rlpycairo
 RUN pip3 install phonenumbers
 RUN pip3 install pyOpenSSL==24.0.0
+RUN pip3 install xades==0.2.4
+RUN pip3 install xmlsig==0.1.9
 
 
 # Copy entrypoint script and Odoo configuration file
@@ -98,7 +101,7 @@ VOLUME ["/var/lib/odoo", "/mnt/extra-addons"]
 
 # Install Odoo modules
 RUN git clone --depth=1 --branch=18.0 https://github.com/joguenco/odoo-l10n-ecuador.git /mnt/extra-addons
-RUN cd /mnt/extra-addons && pip3 install -r requirements.txt
+# RUN cd /mnt/extra-addons && pip3 install -r requirements.txt
 
 
 RUN ln -s /opt/odoo/server/odoo-bin /usr/bin/odoo-bin
