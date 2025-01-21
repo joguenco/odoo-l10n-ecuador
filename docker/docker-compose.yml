@@ -1,21 +1,23 @@
-version: "3.7"
-
 services:
-  web:
+  odoo:
     build:
       context: ./
       dockerfile: Dockerfile
     restart: always
-    image: demo_odoo_18
+    image: odoo:18.0
     container_name: demo_odoo_18
     network_mode: bridge
     ports:
       - "7008:8069"
     volumes:
-      - data:/var/lib/odoo
+      - ./data:/var/lib/odoo
+      - ./addons:/mnt/extra-addons
     environment:
       HOST: "host.docker.internal"
       USER: "demo_odoo_18"
       PASSWORD: "o"
     extra_hosts:
       - "host.docker.internal:host-gateway"
+
+volumes:
+  data:
