@@ -10,7 +10,9 @@ services:
     container_name: demo_odoo_18
     network_mode: bridge
     ports:
-      - "8069:8069"
+      - "7008:8069"
+    volumes:
+      - data:/var/lib/odoo
     environment:
       HOST: "host.docker.internal"
       USER: "demo_odoo_18"
