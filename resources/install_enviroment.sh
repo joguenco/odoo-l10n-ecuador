@@ -56,4 +56,3 @@ odoo --version
 odoo -c odoo.conf --save --stop
 
 mkdir custom_addons
-

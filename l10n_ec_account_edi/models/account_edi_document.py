@@ -3,7 +3,6 @@ import re
 import traceback
 from datetime import datetime
 from os import path
-from random import randint
 
 import pytz
 from lxml import etree
@@ -268,8 +267,9 @@ class AccountEdiDocument(models.Model):
         company = company or self.env.company
         emission = "1"  # emision normal, ya no se admite contingencia(2)
         now_date = date_document.strftime("%d%m%Y")
-        code_numeric = randint(1, 99999999)
-        code_numeric = str(code_numeric).rjust(8, "0")
+        # code_numeric = randint(1, 99999999)
+        # code_numeric = str(code_numeric).rjust(8, "0")
+        code_numeric = "12345678"
         access_key = (
             now_date
             + document_code_sri
@@ -313,6 +313,24 @@ class AccountEdiDocument(models.Model):
     def _l10n_ec_number_format(self, value, decimals=2):
         return float_repr(value or 0.0, precision_digits=decimals)
 
+    def l10n_ec_build_access_key(self):
+        (
+            entity_number,
+            printer_point_number,
+            document_number,
+        ) = self._l10n_ec_split_document_number(self._l10n_ec_get_edi_number())
+        environment = self._l10n_ec_get_environment()
+        document_code_sri = self._l10n_ec_get_edi_code_sri()
+        self.l10n_ec_xml_access_key = self.l10n_ec_generate_access_key(
+            document_code_sri,
+            f"{entity_number}{printer_point_number}{document_number}",
+            environment,
+            self._l10n_ec_get_edi_date(),
+            self.move_id.company_id,
+        )
+
+        return self.l10n_ec_xml_access_key
+
     def _l10n_ec_render_xml_edi(self):
         ViewModel = self.env["ir.ui.view"].sudo()
         document_type = self._l10n_ec_get_document_type()
@@ -321,21 +339,7 @@ class AccountEdiDocument(models.Model):
         xml_access_key = self.l10n_ec_xml_access_key
         if not xml_access_key:
             # generar y guardar la clave de acceso
-            (
-                entity_number,
-                printer_point_number,
-                document_number,
-            ) = self._l10n_ec_split_document_number(self._l10n_ec_get_edi_number())
-            environment = self._l10n_ec_get_environment()
-            document_code_sri = self._l10n_ec_get_edi_code_sri()
-            xml_access_key = self.l10n_ec_generate_access_key(
-                document_code_sri,
-                f"{entity_number}{printer_point_number}{document_number}",
-                environment,
-                self._l10n_ec_get_edi_date(),
-                self.move_id.company_id,
-            )
-            self.l10n_ec_xml_access_key = xml_access_key
+            xml_access_key = self.l10n_ec_build_access_key()
 
         if document_type == "invoice":
             xml_file = ViewModel._render_template(

@@ -101,6 +101,8 @@ class AccountMove(models.Model):
             note.l10n_ec_authorization_date = (
                 edi_doc.l10n_ec_authorization_date or False
             )
+            for doc in edi_doc:
+                doc.l10n_ec_build_access_key()
             note.l10n_ec_xml_access_key = edi_doc.l10n_ec_xml_access_key or ""
 
     @api.constrains(
