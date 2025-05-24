@@ -29,6 +29,29 @@ pip install rlpycairo
 pip install phonenumbers
 ```
 
+## Installation
+Use the following script to install, the script is in resources folder:
+```
+./install_enviroment.sh 18.0 odoo18
+```
+```
+odoo -d odoo18 -r odoo18 -w o --stop-after-init
+```
+or
+```
+odoo -d odoo18 -r odoo18 -w o --without-demo=all --stop-after-init
+```
+```
+pip install -r custom_addons/odoo-l10n-ecuador/requirements.txt
+```
+```
+odoo -c odoo.conf -i l10n_ec_account_edi --stop-after-init
+```
+## Run
+```
+odoo -c odoo.conf
+```
+
 ## Licenses
 
 This repository is licensed under [AGPL-3.0](LICENSE).
