@@ -9,6 +9,8 @@
     "depends": ["point_of_sale", "l10n_ec_account_edi"],
     "data": [
         # 'security/ir.model.access.csv',
+        "views/res_partner_view.xml",
+        "views/latam_res_partner_view.xml",
     ],
     "installable": True,
     "application": True,
