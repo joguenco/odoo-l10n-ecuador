@@ -26,11 +26,15 @@ class ResPartner(models.Model):
 
     @api.onchange("vat")
     def _onchange_vat(self):
-        if self.vat:
-            super().check_vat()
-            (valid, message) = self.l10n_ec_validate_ci(self.vat)
-            if not valid:
-                raise ValidationError(_(message))
+        if self._l10n_ec_get_identification_type() == "cedula":
+            if self.vat:
+                super().check_vat()
+                (valid, message) = self.l10n_ec_validate_ci(self.vat)
+                if not valid:
+                    raise ValidationError(_(message))
+        elif self._l10n_ec_get_identification_type() == "ruc":
+            if self.vat:
+                super().check_vat()
 
     def l10n_ec_validate_ci(self, identification) -> tuple[bool, str]:
         province = int(identification[0:2])  # dos primeros dígitos de la CI
