@@ -1,9 +1,14 @@
+import requests
+
 from odoo import _, api, fields, models
 from odoo.exceptions import ValidationError
 
 
 class ResPartner(models.Model):
     _inherit = "res.partner"
+
+    api_url = "https://reidi.ec.service.resolvedor.dev/entity/"
+    bearer_token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJyZWlkaS5zZXJ2aWNlLmpvZ3VlbmNvLmRldiIsImlhdCI6MTc0MzgxMTYzMiwiZXhwIjoxNzQ2NDAzNjMyLCJhdWQiOiJqb2d1ZW5jby5kZXYiLCJzdWIiOiJqb3JnZWx1aXNAam9ndWVuY28uZGV2IiwiY2xpZW50IjoiOTk5OTk5OTk5OTk5OSIsIm5hbWUiOiJEZXZlbG9wZXIiLCJlbWFpbCI6ImpvcmdlbHVpc0ByZXNvbHZlZG9yLmRldiIsInJvbGUiOiJkZW1vIiwic2VydmljZSI6IlJlSWRpIiwibGltaXQiOjk5fQ.ElfBlov-dFf_neqC3lTMYnxg6TfxuWtsdu_lPJ03Qpk"
 
     @api.model
     def _get_default_country(self):
@@ -26,15 +31,28 @@ class ResPartner(models.Model):
 
     @api.onchange("vat")
     def _onchange_vat(self):
+        is_legal_identification = False
         if self._l10n_ec_get_identification_type() == "cedula":
             if self.vat:
                 super().check_vat()
                 (valid, message) = self.l10n_ec_validate_ci(self.vat)
                 if not valid:
                     raise ValidationError(_(message))
+                is_legal_identification = True
         elif self._l10n_ec_get_identification_type() == "ruc":
             if self.vat:
                 super().check_vat()
+                is_legal_identification = True
+
+        if is_legal_identification:
+            url = f"{self.api_url}{self.vat}"
+            data = self.make_api_request(url, self.bearer_token)
+
+            if data:
+                self.name = data.get("name", self.name)
+                self.street = data.get("address", self.street)
+
+        return True
 
     def l10n_ec_validate_ci(self, identification) -> tuple[bool, str]:
         province = int(identification[0:2])  # dos primeros dígitos de la CI
@@ -65,3 +83,15 @@ class ResPartner(models.Model):
                 return False, "El tercer dígito no es válido"
         else:
             return False, "El código de provincia no es válido"
+
+    def make_api_request(self, url, token):
+        headers = {
+            "Authorization": f"Bearer {token}",
+            "Content-Type": "application/json",
+        }
+        response = requests.get(url, headers=headers, timeout=30)
+
+        if response.status_code == 200:
+            return response.json()
+        else:
+            return False
