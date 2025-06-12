@@ -3,47 +3,47 @@
  * Email: jorgeluis@resolvedor.dev
  * Website: https://joguenco.dev
  */
-import {patch} from "@web/core/utils/patch";
-import {PosStore} from "@point_of_sale/app/store/pos_store";
-import {makeActionAwaitable} from "@point_of_sale/app/store/make_awaitable_dialog";
-// import { OrderReceipt } from '@point_of_sale/app/screens/receipt_screen/receipt/order_receipt'
+import { patch } from "@web/core/utils/patch";
+import { PosStore } from "@point_of_sale/app/store/pos_store";
+import { makeActionAwaitable } from "@point_of_sale/app/store/make_awaitable_dialog";
+import { OrderReceipt } from '@point_of_sale/app/screens/receipt_screen/receipt/order_receipt'
 
 patch(PosStore.prototype, {
-    /**
-     * Override `getReceiptHeaderData` method to add the invoice to the header.
-     * @param {*} order
-     * @returns
-     */
-    getReceiptHeaderData(order) {
-        const result = super.getReceiptHeaderData(...arguments);
-        result.invoice_id = order.get_invoice();
-        return result;
-    },
+  /**
+   * Override `getReceiptHeaderData` method to add the invoice to the header.
+   * @param {*} order
+   * @returns
+   */
+  getReceiptHeaderData(order) {
+    const result = super.getReceiptHeaderData(...arguments);
+    result.invoice_id = order.get_invoice();
+    return result;
+  },
 
-    async editPartner(partner) {
-        console.log("editPartner mofified", ...arguments);
-        // return super.editPartner(...arguments)
-        const record = await makeActionAwaitable(
-            this.action,
-            "l10n_ec_pos.l10n_ec_res_partner_action_edit_pos",
-            // "point_of_sale.res_partner_action_edit_pos",
-            {
-                props: {resId: partner?.id},
-                additionalContext: this.editPartnerContext(),
-            }
-        );
-        const newPartner = await this.data.read("res.partner", record.config.resIds);
-        return newPartner[0];
-    },
-    /*
-  async printReceipt ({
+  async editPartner(partner) {
+    console.log("editPartner mofified", ...arguments);
+    // return super.editPartner(...arguments)
+    const record = await makeActionAwaitable(
+      this.action,
+      "l10n_ec_pos.l10n_ec_res_partner_action_edit_pos",
+      // "point_of_sale.res_partner_action_edit_pos",
+      {
+        props: { resId: partner?.id },
+        additionalContext: this.editPartnerContext(),
+      }
+    );
+    const newPartner = await this.data.read("res.partner", record.config.resIds);
+    return newPartner[0];
+  },
+
+  async printReceipt({
     basic = false,
     order = this.get_order(),
     printBillActionTriggered = false
   } = {}) {
     const orderForPrinting = this.orderExportForPrinting(order)
     const url = `${this.config.epson_printer_ip}/print`
-    const lines = buildReceiptLines(orderForPrinting)
+    const lines = this.buildReceiptLines(orderForPrinting)
     const data = { lines }
 
     try {
@@ -55,6 +55,7 @@ patch(PosStore.prototype, {
         body: JSON.stringify(data)
       })
     } catch (error) {
+      console.error('Error printing receipt:', error)
       await this.printer.print(
         OrderReceipt,
         {
@@ -67,32 +68,49 @@ patch(PosStore.prototype, {
     }
 
     return true
+  },
+
+  buildReceiptLines(order) {
+    const lines = []
+
+    console.log('order', order)
+    lines.push({ line: `${order.headerData.company.name}` })
+    lines.push({ line: `RUC: ${order.headerData.company.vat}` })
+    lines.push({ line: `Dirección: ${order.headerData.company.city} ${order.headerData.company.street}` })
+    lines.push({ line: `Teléfono: ${order.headerData.company.phone}` })
+    if (order.headerData.company.email) {
+      lines.push({ line: `${order.headerData.company.email}` })
+    }
+    if (order.headerData.company.website) {
+      lines.push({ line: `${order.headerData.company.website}` })
+    }
+    lines.push({ line: 'Clave de Acceso: ' })
+    lines.push({ line: `${order.invoice_id.l10n_ec_xml_access_key}` })
+    lines.push({ line: `${order.invoice_id.name}` })
+    lines.push({ line: `Fecha: ${order.invoice_id.invoice_date}` })
+    lines.push({ line: `Cliente: ${order.headerData.partner.name}` })
+    lines.push({ line: `Identificación: ${order.headerData.partner.vat}` })
+    if (order.headerData.partner.street) {
+      lines.push({ line: `Dirección: ${order.headerData.partner.street}` })
+    }
+    if (order.headerData.partner.email) {
+      lines.push({ line: `${order.headerData.partner.email}` })
+    }
+    lines.push({ line: '- - - - - - - - - - - - - - - - - - - - - -' })
+    lines.push({ line: 'Producto               #        Precio' })
+    lines.push({ line: '- - - - - - - - - - - - - - - - - - - - - -' })
+    for (const l of order.orderlines) {
+      const productName = l.productName
+      const quantity = l.qty
+      const price = l.price
+      console.log('Price', price)
+
+      lines.push({ line: `${productName} ${quantity} ${price}` })
+    }
+
+    return lines
   }
-    */
+
 });
 
-/*
-function buildReceiptLines (order) {
-  const lines = []
 
-  console.log('order', order)
-  console.log('company', order)
-  lines.push({ line: `${order.headerData.company.name}` })
-  lines.push({ line: `VAT: ${order.headerData.company.vat}` })
-  lines.push({ line: `Phone: ${order.headerData.company.phone}` })
-  lines.push({ line: `Address: ${order.headerData.company.city} ${order.headerData.company.street}` })
-  lines.push({ line: `${order.headerData.company.email}` })
-  lines.push({ line: `${order.headerData.company.website}` })
-  lines.push({ line: 'Customer Info' })
-  lines.push({ line: '- - - - - - - - - - - - - - - - - - - - - ' })
-  lines.push({ line: `${order.headerData.partner.name}` })
-  lines.push({ line: `VAT: ${order.headerData.partner.vat}` })
-  lines.push({ line: `${order.headerData.partner.contact_address.replace(/\n/g, ' ')}` })
-  lines.push({ line: `${order.headerData.partner.email}` })
-  lines.push({ line: '- - - - - - - - - - - - - - - - - - - - - ' })
-  lines.push({ line: 'Product               Qty        Price' })
-  lines.push({ line: '- - - - - - - - - - - - - - - - - - - - - ' })
-
-  return lines
-}
-*/
