@@ -35,7 +35,7 @@ patch(PosStore.prototype, {
     const newPartner = await this.data.read("res.partner", record.config.resIds);
     return newPartner[0];
   },
-
+  /*
   async printReceipt({
     basic = false,
     order = this.get_order(),
@@ -110,7 +110,7 @@ patch(PosStore.prototype, {
 
     return lines
   }
-
+  */
 });
 
 
