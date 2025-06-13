@@ -29,30 +29,30 @@ class ResPartner(models.Model):
 
         return result
 
-    @api.onchange("vat")
-    def _onchange_vat(self):
-        is_legal_identification = False
-        if self._l10n_ec_get_identification_type() == "cedula":
-            if self.vat:
-                super().check_vat()
-                (valid, message) = self.l10n_ec_validate_ci(self.vat)
-                if not valid:
-                    raise ValidationError(_(message))
-                is_legal_identification = True
-        elif self._l10n_ec_get_identification_type() == "ruc":
-            if self.vat:
-                super().check_vat()
-                is_legal_identification = True
+    # @api.onchange("vat")
+    # def _onchange_vat(self):
+        # is_legal_identification = False
+        # if self._l10n_ec_get_identification_type() == "cedula":
+        #     if self.vat:
+        #         super().check_vat()
+        #         (valid, message) = self.l10n_ec_validate_ci(self.vat)
+        #         if not valid:
+        #             raise ValidationError(_(message))
+        #         is_legal_identification = True
+        # elif self._l10n_ec_get_identification_type() == "ruc":
+        #     if self.vat:
+        #         super().check_vat()
+        #         is_legal_identification = True
 
-        if is_legal_identification:
-            url = f"{self.api_url}{self.vat}"
-            data = self.make_api_request(url, self.bearer_token)
+        # if is_legal_identification:
+        #     url = f"{self.api_url}{self.vat}"
+        #     data = self.make_api_request(url, self.bearer_token)
 
-            if data:
-                self.name = data.get("name", self.name)
-                self.street = data.get("address", self.street)
+        #     if data:
+        #         self.name = data.get("name", self.name)
+        #         self.street = data.get("address", self.street)
 
-        return True
+        # return True
 
     def l10n_ec_validate_ci(self, identification) -> tuple[bool, str]:
         province = int(identification[0:2])  # dos primeros dígitos de la CI
