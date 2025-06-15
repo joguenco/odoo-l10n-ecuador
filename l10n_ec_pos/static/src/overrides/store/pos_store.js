@@ -6,7 +6,7 @@
 import {patch} from "@web/core/utils/patch";
 import {PosStore} from "@point_of_sale/app/store/pos_store";
 import {makeActionAwaitable} from "@point_of_sale/app/store/make_awaitable_dialog";
-// import { OrderReceipt } from '@point_of_sale/app/screens/receipt_screen/receipt/order_receipt'
+import { OrderReceipt } from '@point_of_sale/app/screens/receipt_screen/receipt/order_receipt'
 
 patch(PosStore.prototype, {
     /**
@@ -35,7 +35,7 @@ patch(PosStore.prototype, {
         const newPartner = await this.data.read("res.partner", record.config.resIds);
         return newPartner[0];
     },
-    /*
+
   async printReceipt({
     basic = false,
     order = this.get_order(),
@@ -74,6 +74,7 @@ patch(PosStore.prototype, {
     const lines = []
 
     console.log('order', order)
+    
     lines.push({ line: `${order.headerData.company.name}` })
     lines.push({ line: `RUC: ${order.headerData.company.vat}` })
     lines.push({ line: `Dirección: ${order.headerData.company.city} ${order.headerData.company.street}` })
@@ -96,19 +97,30 @@ patch(PosStore.prototype, {
     if (order.headerData.partner.email) {
       lines.push({ line: `${order.headerData.partner.email}` })
     }
-    lines.push({ line: '- - - - - - - - - - - - - - - - - - - - - -' })
-    lines.push({ line: 'Producto               #        Precio' })
-    lines.push({ line: '- - - - - - - - - - - - - - - - - - - - - -' })
+    lines.push({ line: '- - - - - - - - - - - - - - - - - - - - - - - -' })
+    lines.push({ line: 'Producto                         #       Precio' })
+    lines.push({ line: '- - - - - - - - - - - - - - - - - - - - - - - -' })
     for (const l of order.orderlines) {
-      const productName = l.productName
-      const quantity = l.qty
-      const price = l.price
-      console.log('Price', price)
+      const productName = l.productName.padEnd(27).slice(0, 27)
+      const quantity = l.qty.padStart(9)
+      const price = l.price.slice(2).padStart(9)
 
       lines.push({ line: `${productName} ${quantity} ${price}` })
+    }
+    lines.push({ line: '- - - - - - - - - - - - - - - - - - - - - - - -' })
+
+    const subtotal = this.env.utils.formatCurrency(order.total_without_tax, false)
+    const tax = this.env.utils.formatCurrency(order.taxTotals.tax_amount, false)
+    const total = this.env.utils.formatCurrency(order.total_paid, false)
+
+    lines.push({ line: `${''.padStart(27)} Subtotal: ${subtotal.padStart(9)}` })
+    lines.push({ line: `${''.padStart(27)}      IVA: ${tax.padStart(9)}` })
+    lines.push({ line: `${''.padStart(27)}    Total: ${total.padStart(9)}` })
+    lines.push({ line: `Forma de Pago:` })
+    for (const payment of order.paymentlines) {
+      lines.push({ line: `- ${payment.name}: ${payment.amount}` })
     }
 
     return lines
   }
-  */
 });
