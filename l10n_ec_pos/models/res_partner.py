@@ -20,39 +20,39 @@ class ResPartner(models.Model):
         "res.country", string="Country", default=_get_default_country
     )
 
-    @api.constrains("vat", "country_id", "l10n_latam_identification_type_id")
-    def check_vat(self):
-        result = super().check_vat()
-        (valid, message) = self.l10n_ec_validate_ci(self.vat)
-        if not valid:
-            raise ValidationError(_(message))
+    # @api.constrains("vat", "country_id", "l10n_latam_identification_type_id")
+    # def check_vat(self):
+    #     result = super().check_vat()
+    #     (valid, message) = self.l10n_ec_validate_ci(self.vat)
+    #     if not valid:
+    #         raise ValidationError(_(message))
 
-        return result
+    #     return result
 
-    # @api.onchange("vat")
-    # def _onchange_vat(self):
-        # is_legal_identification = False
-        # if self._l10n_ec_get_identification_type() == "cedula":
-        #     if self.vat:
-        #         super().check_vat()
-        #         (valid, message) = self.l10n_ec_validate_ci(self.vat)
-        #         if not valid:
-        #             raise ValidationError(_(message))
-        #         is_legal_identification = True
-        # elif self._l10n_ec_get_identification_type() == "ruc":
-        #     if self.vat:
-        #         super().check_vat()
-        #         is_legal_identification = True
+    @api.onchange("vat")
+    def onchange_vat(self):        
+        self.ensure_one()
+        if self.vat and self.country_id.code == "EC":
+            is_valid_identification = False
+            if self._l10n_ec_get_identification_type() == "cedula":
+                super().check_vat()
+                (valid, message) = self.l10n_ec_validate_ci(self.vat)
+                if not valid:
+                    raise ValidationError(_(message))
+                is_valid_identification = True
+            elif self._l10n_ec_get_identification_type() == "ruc":
+                if self.vat:
+                    super().check_vat()
+                    is_valid_identification = True
 
-        # if is_legal_identification:
-        #     url = f"{self.api_url}{self.vat}"
-        #     data = self.make_api_request(url, self.bearer_token)
+            # Query identification 
+            if is_valid_identification:
+                url = f"{self.api_url}{self.vat}"
+                data = self.make_api_request(url, self.bearer_token)
 
-        #     if data:
-        #         self.name = data.get("name", self.name)
-        #         self.street = data.get("address", self.street)
-
-        # return True
+                if data:
+                    self.name = data.get("name", self.name)
+                    self.street = data.get("address", self.street)                
 
     def l10n_ec_validate_ci(self, identification) -> tuple[bool, str]:
         province = int(identification[0:2])  # dos primeros dígitos de la CI
