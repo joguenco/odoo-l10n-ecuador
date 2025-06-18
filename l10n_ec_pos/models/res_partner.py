@@ -30,7 +30,7 @@ class ResPartner(models.Model):
     #     return result
 
     @api.onchange("vat")
-    def onchange_vat(self):        
+    def onchange_vat(self):
         self.ensure_one()
         if self.vat and self.country_id.code == "EC":
             is_valid_identification = False
@@ -45,14 +45,14 @@ class ResPartner(models.Model):
                     super().check_vat()
                     is_valid_identification = True
 
-            # Query identification 
+            # Query identification
             if is_valid_identification:
                 url = f"{self.api_url}{self.vat}"
                 data = self.make_api_request(url, self.bearer_token)
 
                 if data:
                     self.name = data.get("name", self.name)
-                    self.street = data.get("address", self.street)                
+                    self.street = data.get("address", self.street)
 
     def l10n_ec_validate_ci(self, identification) -> tuple[bool, str]:
         province = int(identification[0:2])  # dos primeros dígitos de la CI
