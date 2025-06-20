@@ -39,5 +39,12 @@
         id="menu_one_configuration"
         parent="menu_owl_one"
         sequence="90"
-    />
+    >
+        <menuitem
+            id="menu_one_settings"
+            name="Settings"
+            sequence="10"
+            action="action_one_config_settings"
+        />
+    </menuitem>
 </odoo>

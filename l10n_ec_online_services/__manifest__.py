@@ -13,6 +13,7 @@
         "wizard/one_reidi.xml",
         "views/one_dashboard.xml",
         "views/one_version.xml",
+        "views/res_config_settings.xml",
         "views/one_menu.xml",
     ],
     "installable": True,
