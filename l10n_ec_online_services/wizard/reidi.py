@@ -7,7 +7,7 @@ class Reidi(models.TransientModel):
     _name = "one.reidi.wizard"
     _description = "Recover Identification"
 
-    identification = fields.Char(required=True)
+    identification = fields.Char()
     name = fields.Char()
     address = fields.Char()
 
