@@ -1,7 +1,11 @@
+import logging
+
 import requests
 
 from odoo import _, api, fields, models
 from odoo.exceptions import ValidationError
+
+_logger = logging.getLogger(__name__)
 
 
 class ResPartner(models.Model):
@@ -53,6 +57,9 @@ class ResPartner(models.Model):
                 if data:
                     self.name = data.get("name", self.name)
                     self.street = data.get("address", self.street)
+                else:
+                    self.name = False
+                    self.street = False
 
     def l10n_ec_validate_ci(self, identification) -> tuple[bool, str]:
         province = int(identification[0:2])  # dos primeros dígitos de la CI
@@ -89,9 +96,13 @@ class ResPartner(models.Model):
             "Authorization": f"Bearer {token}",
             "Content-Type": "application/json",
         }
-        response = requests.get(url, headers=headers, timeout=30)
+        try:
+            response = requests.get(url, headers=headers, timeout=30)
 
-        if response.status_code == 200:
-            return response.json()
-        else:
+            if response.status_code == 200:
+                return response.json()
+            else:
+                return False
+        except Exception as e:
+            _logger.error(f"Error making API request to {url}: {e}")
             return False

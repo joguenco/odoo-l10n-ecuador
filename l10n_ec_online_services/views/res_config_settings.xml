@@ -1,25 +1,34 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8" ?>
 <odoo>
-
     <record id="res_config_settings_view_form" model="ir.ui.view">
-        <field name="name">res.config.settings.view.form.inherit.l10n_ec_online_services</field>
+        <field
+            name="name"
+        >res.config.settings.view.form.inherit.l10n_ec_online_services</field>
         <field name="model">res.config.settings</field>
-        <field name="priority" eval="100"/>
-        <field name="inherit_id" ref="base.res_config_settings_view_form"/>
+        <field name="priority" eval="100" />
+        <field name="inherit_id" ref="base.res_config_settings_view_form" />
         <field name="arch" type="xml">
             <xpath expr="//form" position="inside">
-            <app string="ReIdi" data-string="ReIdi" name="one_management">
-                    <block title="ReIdi Service" id="one_setting_container">                                                                        
+                <app string="ReIdi" data-string="ReIdi" name="one_management">
+                    <block title="ReIdi Service" id="one_setting_container">
                         <setting id="one_option_reidi" help="Recover Identification">
-                            <field name="use_reidi"/>                            
+                            <field name="use_reidi" />
                             <div class="content-group" invisible="not use_reidi">
-                                    <label string="URL" for="reidi_api_url" class="col-lg-4 o_light_label"/>
-                                    <field name="reidi_api_url"/>
-                                    <label string="Token" for="reidi_bearer_token" class="col-lg-4 o_light_label"/>
-                                    <field name="reidi_bearer_token"/>
-                            </div>                          
+                                <label
+                                    string="URL"
+                                    for="reidi_api_url"
+                                    class="col-lg-4 o_light_label"
+                                />
+                                <field name="reidi_api_url" />
+                                <label
+                                    string="Token"
+                                    for="reidi_bearer_token"
+                                    class="col-lg-4 o_light_label"
+                                />
+                                <field name="reidi_bearer_token" />
+                            </div>
                         </setting>
-                    </block>                                        
+                    </block>
                 </app>
             </xpath>
         </field>
@@ -28,9 +37,11 @@
     <record id="action_one_config_settings" model="ir.actions.act_window">
         <field name="name">Settings</field>
         <field name="res_model">res.config.settings</field>
-        <field name="view_id" ref="res_config_settings_view_form"/>
+        <field name="view_id" ref="res_config_settings_view_form" />
         <field name="view_mode">form</field>
         <field name="target">inline</field>
-        <field name="context">{'module' : 'l10n_ec_online_services', 'bin_size': False}</field>
+        <field
+            name="context"
+        >{'module' : 'l10n_ec_online_services', 'bin_size': False}</field>
     </record>
 </odoo>

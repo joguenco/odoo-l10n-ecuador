@@ -1,9 +1,8 @@
-from odoo import fields, models, api, _
+from odoo import api, fields, models
 
 
 class ResConfigSettings(models.TransientModel):
     _inherit = "res.config.settings"
-
 
     use_reidi = fields.Boolean(
         string="Use ReIdi",
@@ -26,13 +25,21 @@ class ResConfigSettings(models.TransientModel):
         res = super().get_values()
         res.update(
             {
-                "reidi_api_url": self.env["ir.config_parameter"].sudo().get_param("l10n_ec_online_services.reidi_api_url"),
-                "reidi_bearer_token": self.env["ir.config_parameter"].sudo().get_param("l10n_ec_online_services.reidi_bearer_token"),
+                "reidi_api_url": self.env["ir.config_parameter"]
+                .sudo()
+                .get_param("l10n_ec_online_services.reidi_api_url"),
+                "reidi_bearer_token": self.env["ir.config_parameter"]
+                .sudo()
+                .get_param("l10n_ec_online_services.reidi_bearer_token"),
             }
         )
         return res
 
     def set_values(self):
         super().set_values()
-        self.env["ir.config_parameter"].sudo().set_param("l10n_ec_online_services.reidi_api_url", self.reidi_api_url)
-        self.env["ir.config_parameter"].sudo().set_param("l10n_ec_online_services.reidi_bearer_token", self.reidi_bearer_token)
+        self.env["ir.config_parameter"].sudo().set_param(
+            "l10n_ec_online_services.reidi_api_url", self.reidi_api_url
+        )
+        self.env["ir.config_parameter"].sudo().set_param(
+            "l10n_ec_online_services.reidi_bearer_token", self.reidi_bearer_token
+        )
