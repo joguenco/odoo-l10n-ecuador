@@ -21,7 +21,7 @@ class AccountMoveLine(models.Model):
             ),
             "cantidad": EdiDocument._l10n_ec_number_format(self.quantity, decimals=6),
             "precioUnitario": EdiDocument._l10n_ec_number_format(
-                self.price_unit, decimals=6
+                edi_values["price_subtotal_unit"], decimals=6
             ),
             "descuento": EdiDocument._l10n_ec_number_format(
                 edi_values["price_discount"], decimals=6
