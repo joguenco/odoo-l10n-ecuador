@@ -9,7 +9,7 @@
         sequence="10"
     />
 
-    <menuitem name="Manage" id="menu_one_manage" parent="menu_owl_one" sequence="10">
+    <menuitem id="menu_one_manage" name="Manage" parent="menu_owl_one" sequence="10">
         <menuitem
             id="menu_manage_version"
             name="Version"
@@ -45,6 +45,7 @@
             name="Settings"
             sequence="10"
             action="action_one_config_settings"
+            groups="base.group_system"
         />
     </menuitem>
 </odoo>
