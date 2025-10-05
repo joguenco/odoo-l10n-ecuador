@@ -1,23 +1,30 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8" ?>
 <odoo>
     <record id="pos_iot_config_view_form" model="ir.ui.view">
         <field name="name">pos.iot.config.form.view</field>
         <field name="model">pos.config</field>
-        <field name="inherit_id" ref="point_of_sale.pos_config_view_form"/>
+        <field name="inherit_id" ref="point_of_sale.pos_config_view_form" />
         <field name="arch" type="xml">
             <xpath expr="//setting[@id='other_devices']" position="inside">
                 <div class="content-group" invisible="not other_devices">
-                    <field name="http_printer_ip" placeholder="HTTP Printer IP Address" />
+                    <field
+                        name="http_printer_ip"
+                        placeholder="HTTP Printer IP Address"
+                    />
                     <div class="row" invisible="http_printer_ip in [False, '']">
                         <div class="col-lg-5 o_light_label">
-                            <label string="Cashdrawer" for="iface_cashdrawer"/>
+                            <label string="Cashdrawer" for="iface_cashdrawer" />
                         </div>
                         <div class="col-lg-7">
-                            <field name="iface_cashdrawer"/>
+                            <field name="iface_cashdrawer" />
                         </div>
                     </div>
                 </div>
-                <div role="alert" class="alert alert-warning" invisible="not iface_print_via_proxy or not other_devices or http_printer_ip in [False, '']">
+                <div
+                    role="alert"
+                    class="alert alert-warning"
+                    invisible="not iface_print_via_proxy or not other_devices or http_printer_ip in [False, '']"
+                >
                     The HTTP receipt printer will be used.
                 </div>
             </xpath>

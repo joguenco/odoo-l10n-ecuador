@@ -28,7 +28,7 @@
                                     for="reidi_bearer_token"
                                     class="col-lg-4 o_light_label"
                                 />
-                                <field name="reidi_bearer_token" style="width:90%;"/>
+                                <field name="reidi_bearer_token" style="width:90%;" />
                             </div>
                         </setting>
                     </block>

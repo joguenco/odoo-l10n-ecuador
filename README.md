@@ -53,6 +53,11 @@ odoo -c odoo.conf -i l10n_ec_account_edi --stop-after-init
 odoo -c odoo.conf
 ```
 
+## Reinstall pre-commit hooks
+```
+pip install --force-reinstall -U git+https://github.com/OCA/odoo-pre-commit-hooks.git@main
+```
+
 ## Licenses
 
 This repository is licensed under [AGPL-3.0](LICENSE).
