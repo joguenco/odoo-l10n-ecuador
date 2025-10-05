@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="res_config_settings_view_form" model="ir.ui.view">
+        <field name="name">res.config.settings.view.form.inherit.pos.http.printer</field>
+        <field name="model">res.config.settings</field>
+        <field name="inherit_id" ref="point_of_sale.res_config_settings_view_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//setting[@id='pos_other_devices']" position="before">
+                <setting id="pos_http_printer" string="HTTP Printer" help="Connect printer to your PoS with HTTP protocol" documentation="https://github.com/joguenco/EchoPrint/tree/gui">
+                    <field name="use_http_printer" />
+                    <div class="content-group" invisible="not use_http_printer">
+                        <field name="pos_http_printer_ip" placeholder="HTTP Receipt Printer IP Address" />            
+                    </div>
+                </setting>
+            </xpath>
+        </field>
+    </record>
+</odoo>
