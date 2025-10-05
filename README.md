@@ -26,6 +26,7 @@ This part will be replaced when running the oca-gen-addons-table script from OCA
 ## Additional Dependencies
 ```
 pip install rlpycairo
+pip install rl-renderPM
 pip install phonenumbers
 ```
 
