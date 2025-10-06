@@ -29,3 +29,15 @@ class ResConfigSettings(models.TransientModel):
     def _compute_pos_http_printer_ip(self):
         for res_config in self:
             res_config.pos_http_printer_ip = res_config.pos_config_id.http_printer_ip
+
+    def action_ping_http_printer(self):
+        return {
+            "type": "ir.actions.client",
+            "tag": "ping_printer_action",
+            "context": {
+                "default_name": "Ping",
+            },
+            "params": {
+                "url": self.pos_http_printer_ip,
+            },
+        }

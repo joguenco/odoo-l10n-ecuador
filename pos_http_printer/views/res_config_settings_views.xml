@@ -20,6 +20,13 @@
                             name="pos_http_printer_ip"
                             placeholder="HTTP Receipt Printer IP Address"
                         />
+                        <br />
+                        <button
+                            type="object"
+                            name="action_ping_http_printer"
+                            string="Ping"
+                            class="btn btn-secondary o_form_button mt16"
+                        />
                     </div>
                 </setting>
             </xpath>

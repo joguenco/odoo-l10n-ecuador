@@ -35,6 +35,7 @@ patch(PosStore.prototype, {
                     body: JSON.stringify(data),
                 });
             } catch (error) {
+                this.env.services.notification.add("Fail print", {type: "danger"});
                 return false;
             }
         } else {

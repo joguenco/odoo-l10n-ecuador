@@ -2,7 +2,7 @@
     "name": "POS HTTP Printer",
     "summary": "Print receipts from Odoo POS using HTTP protocol "
     "to communicate with the printer.",
-    "author": "Odoo Community Association (OCA), " "Jorge Quiguango",
+    "author": "Odoo Community Association (OCA), " "Jorge Luis",
     "website": "https://github.com/OCA/l10n-ecuador",
     "category": "Sales/Point of Sale",
     "license": "AGPL-3",
@@ -15,8 +15,10 @@
     "application": True,
     "assets": {
         "point_of_sale._assets_pos": [
-            "pos_http_printer/static/src/**/*.js",
-            "pos_http_printer/static/src/**/*.xml",
+            "pos_http_printer/static/src/overrides/**/*.js",
+        ],
+        "web.assets_backend": [
+            "pos_http_printer/static/src/backend/actions/**/*.js",
         ],
     },
 }
