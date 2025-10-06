@@ -20,6 +20,11 @@ class ResConfigSettings(models.TransientModel):
         readonly=False,
     )
 
+    @api.onchange("use_http_printer")
+    def _onchange_use_http_printer(self):
+        if not self.use_http_printer:
+            self.pos_http_printer_ip = False
+
     @api.depends("pos_other_devices", "pos_config_id")
     def _compute_pos_http_printer_ip(self):
         for res_config in self:

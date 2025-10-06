@@ -42,20 +42,24 @@ patch(PosStore.prototype, {
         printBillActionTriggered = false,
     } = {}) {
         const orderForPrinting = this.orderExportForPrinting(order);
-        const url = `${this.config.http_printer_ip}/print`;
-        const lines = this.buildReceiptLines(orderForPrinting);
-        const data = {lines};
 
-        try {
-            await fetch(url, {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json",
-                },
-                body: JSON.stringify(data),
-            });
-        } catch (error) {
-            console.error("Error printing receipt:", error);
+        if (this.config.http_printer_ip) {
+            const url = `${this.config.http_printer_ip}/print`;
+            const lines = this.buildReceiptLines(orderForPrinting);
+            const data = {lines};
+
+            try {
+                await fetch(url, {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json",
+                    },
+                    body: JSON.stringify(data),
+                });
+            } catch (error) {
+                return false;
+            }
+        } else {
             await this.printer.print(
                 OrderReceipt,
                 {
