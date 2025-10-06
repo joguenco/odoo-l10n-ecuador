@@ -1,18 +1,17 @@
 import logging
 
-import requests
-
 from odoo import _, api, fields, models
 from odoo.exceptions import ValidationError
+
+from odoo.addons.l10n_ec_online_services.utils.http_request import (
+    make_api_request,
+)
 
 _logger = logging.getLogger(__name__)
 
 
 class ResPartner(models.Model):
     _inherit = "res.partner"
-
-    api_url = "https://reidi.ec.service.resolvedor.dev/entity/"
-    bearer_token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJyZWlkaS5zZXJ2aWNlLmpvZ3VlbmNvLmRldiIsImlhdCI6MTc0MzgxMTYzMiwiZXhwIjoxNzQ2NDAzNjMyLCJhdWQiOiJqb2d1ZW5jby5kZXYiLCJzdWIiOiJqb3JnZWx1aXNAam9ndWVuY28uZGV2IiwiY2xpZW50IjoiOTk5OTk5OTk5OTk5OSIsIm5hbWUiOiJEZXZlbG9wZXIiLCJlbWFpbCI6ImpvcmdlbHVpc0ByZXNvbHZlZG9yLmRldiIsInJvbGUiOiJkZW1vIiwic2VydmljZSI6IlJlSWRpIiwibGltaXQiOjk5fQ.ElfBlov-dFf_neqC3lTMYnxg6TfxuWtsdu_lPJ03Qpk"
 
     @api.model
     def _get_default_country(self):
@@ -34,6 +33,7 @@ class ResPartner(models.Model):
     #     return result
 
     @api.onchange("vat")
+    # pylint: disable=W8110
     def onchange_vat(self):
         self.ensure_one()
         if self.vat and self.country_id.code == "EC":
@@ -51,15 +51,34 @@ class ResPartner(models.Model):
 
             # Query identification
             if is_valid_identification:
-                url = f"{self.api_url}{self.vat}"
-                data = self.make_api_request(url, self.bearer_token)
+                use_reidi = (
+                    self.env["ir.config_parameter"]
+                    .sudo()
+                    .get_param("l10n_ec_online_services.use_reidi")
+                )
+                if use_reidi:
+                    api_url = (
+                        self.env["ir.config_parameter"]
+                        .sudo()
+                        .get_param("l10n_ec_online_services.reidi_api_url")
+                    )
+                    bearer_token = (
+                        self.env["ir.config_parameter"]
+                        .sudo()
+                        .get_param("l10n_ec_online_services.reidi_bearer_token")
+                    )
+                    url = f"{api_url}/entity/{self.vat}"
+                    try:
+                        data = make_api_request(url, bearer_token)
+                    except Exception as e:
+                        _logger.error(f"Error making API request to {url}: {e}")
 
-                if data:
-                    self.name = data.get("name", self.name)
-                    self.street = data.get("address", self.street)
-                else:
-                    self.name = False
-                    self.street = False
+                    if data:
+                        self.name = data.get("name", self.name)
+                        self.street = data.get("address", self.street)
+                    else:
+                        self.name = False
+                        self.street = False
 
     def l10n_ec_validate_ci(self, identification) -> tuple[bool, str]:
         province = int(identification[0:2])  # dos primeros dígitos de la CI
@@ -90,19 +109,3 @@ class ResPartner(models.Model):
                 return False, "El tercer dígito no es válido"
         else:
             return False, "El código de provincia no es válido"
-
-    def make_api_request(self, url, token):
-        headers = {
-            "Authorization": f"Bearer {token}",
-            "Content-Type": "application/json",
-        }
-        try:
-            response = requests.get(url, headers=headers, timeout=30)
-
-            if response.status_code == 200:
-                return response.json()
-            else:
-                return False
-        except Exception as e:
-            _logger.error(f"Error making API request to {url}: {e}")
-            return False

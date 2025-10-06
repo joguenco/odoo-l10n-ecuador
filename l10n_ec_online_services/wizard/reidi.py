@@ -1,6 +1,9 @@
-import requests
-
 from odoo import _, fields, models
+
+# pylint: disable=W8150
+from odoo.addons.l10n_ec_online_services.utils.http_request import (
+    make_api_request,
+)
 
 
 class Reidi(models.TransientModel):
@@ -33,7 +36,7 @@ class Reidi(models.TransientModel):
             if self.identification:
                 url = f"{api_url}/entity/{self.identification}"
                 try:
-                    data = self.make_api_request(url, bearer_token)
+                    data = make_api_request(url, bearer_token)
 
                     if data:
                         self.name = data.get("name", self.name)
@@ -43,7 +46,7 @@ class Reidi(models.TransientModel):
                 except Exception as e:
                     return self.message(
                         _("Error while fetching data: ") + str(e),
-                        type="danger",
+                        type_of="danger",
                         title="Error!",
                     )
             else:
@@ -60,26 +63,14 @@ class Reidi(models.TransientModel):
 
         return self.message(_("ReIdi service is inactive."))
 
-    def message(self, message, type="warning", title="Warning!"):
+    def message(self, message, type_of="warning", title="Warning!"):
         return {
             "type": "ir.actions.client",
             "tag": "display_notification",
             "params": {
                 "title": title,
                 "message": message,
-                "type": type,  # 'success', 'warning', 'danger', 'info'
+                "type": type_of,  # 'success', 'warning', 'danger', 'info'
                 "sticky": False,  # Set to True to prevent auto-dismiss
             },
         }
-
-    def make_api_request(self, url, token):
-        headers = {
-            "Authorization": f"Bearer {token}",
-            "Content-Type": "application/json",
-        }
-        response = requests.get(url, headers=headers, timeout=30)
-
-        if response.status_code == 200:
-            return response.json()
-        else:
-            return False
