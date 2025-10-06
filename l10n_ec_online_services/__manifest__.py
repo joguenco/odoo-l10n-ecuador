@@ -1,8 +1,8 @@
 {
     "name": "Online Services for Ecuador",
     "summary": "Online services for Ecuadorian localization",
-    "author": "Odoo Community Association (OCA), " "joguenco.dev",
-    "website": "https://github.com/OCA/l10n-ecuador",
+    "author": "Odoo Community Association (OCA), " "Jorge Luis",
+    "website": "https://github.com/OCA/l10n-ecuador" "https://resolvedor.dev",
     "category": "Services/Online Services",
     "license": "AGPL-3",
     "version": "18.0.1.0.0",

@@ -3,7 +3,7 @@
     "summary": "Print receipts from Odoo POS using HTTP protocol "
     "to communicate with the printer.",
     "author": "Odoo Community Association (OCA), " "Jorge Luis",
-    "website": "https://github.com/OCA/l10n-ecuador",
+    "website": "https://github.com/OCA/l10n-ecuador" "https://resolvedor.dev",
     "category": "Sales/Point of Sale",
     "license": "AGPL-3",
     "version": "18.0.1.0.0",
