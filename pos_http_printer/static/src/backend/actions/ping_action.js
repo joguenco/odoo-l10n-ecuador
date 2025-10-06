@@ -1,7 +1,6 @@
-import { registry } from "@web/core/registry"
+import {registry} from "@web/core/registry";
 
 async function pingPrinterAction(env, action) {
-
     const url = `${action.params.url}/ping`;
 
     try {
@@ -11,11 +10,10 @@ async function pingPrinterAction(env, action) {
                 "Content-Type": "application/json",
             },
         });
-        env.services.notification.add('Pong', { type: 'success' })
+        env.services.notification.add("Pong", {type: "success"});
     } catch (error) {
-        env.services.notification.add('Fail ping', { type: 'danger' })
+        env.services.notification.add("Fail ping", {type: "danger"});
     }
-
 }
 
-registry.category('actions').add('ping_printer_action', pingPrinterAction) 
+registry.category("actions").add("ping_printer_action", pingPrinterAction);

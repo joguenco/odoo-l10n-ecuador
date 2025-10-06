@@ -12,13 +12,11 @@ class ResConfigSettings(models.TransientModel):
     )
     reidi_api_url = fields.Char(
         string="API URL",
-        related="company_id.reidi_api_url",
         readonly=False,
-        default="https://reidi.ec.service.resolvedor.dev",
+        config_parameter="l10n_ec_online_services.reidi_api_url",
     )
     reidi_bearer_token = fields.Char(
         string="Bearer Token",
-        related="company_id.reidi_bearer_token",
         readonly=False,
-        default="your_bearer_token_here",
+        config_parameter="l10n_ec_online_services.reidi_bearer_token",
     )
