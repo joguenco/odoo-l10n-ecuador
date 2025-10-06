@@ -9,9 +9,14 @@
     "version": "18.0.1.0.0",
     "depends": ["point_of_sale"],
     "data": [
-        # 'views/pos_config_views.xml',
         "views/res_config_settings_views.xml",
-        # 'views/pos_printer_views.xml',
     ],
     "installable": True,
+    "application": True,
+    "assets": {
+        "point_of_sale._assets_pos": [
+            "pos_http_printer/static/src/**/*.js",
+            "pos_http_printer/static/src/**/*.xml",
+        ],
+    },
 }
