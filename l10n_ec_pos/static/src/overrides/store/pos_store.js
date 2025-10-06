@@ -42,7 +42,7 @@ patch(PosStore.prototype, {
         printBillActionTriggered = false,
     } = {}) {
         const orderForPrinting = this.orderExportForPrinting(order);
-        const url = `${this.config.epson_printer_ip}/print`;
+        const url = `${this.config.http_printer_ip}/print`;
         const lines = this.buildReceiptLines(orderForPrinting);
         const data = {lines};
 
