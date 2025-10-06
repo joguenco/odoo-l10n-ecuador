@@ -22,6 +22,10 @@ This part will be replaced when running the oca-gen-addons-table script from OCA
 [//]: # (end addons)
 
 <!-- prettier-ignore-end -->
+## Documentation
+- POS https://www.youtube.com/watch?v=MsJJTnEIZHo
+- HTTP Printer for POS https://www.youtube.com/watch?v=dnT3n_ltbKk
+- Recover RUC and Identification of Ecuador https://www.youtube.com/watch?v=h1RjqiFGEO0
 
 ## Additional Dependencies
 ```
