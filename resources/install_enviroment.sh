@@ -5,6 +5,10 @@ if [[ -z $1 ]]; then
   echo "No parameter passed with the Odoo version."
   exit 1
 else
+  if [[ $1 != "18.0" && $1 != "19.0" ]]; then
+    echo "Parameter passed is not valid. Use 18.0 or 19.0"
+    exit 1
+  fi
   echo "Parameter for Odoo version is: $1"
 fi
 
@@ -25,16 +29,24 @@ mv odoo $2
 
 cd $2
 
-python3.12 -m venv venv
+if [[ $1 == "18.0" ]]; then
+  echo "Odoo version is 18.0"
+  echo "Installing python3.12"
+  python3.12 -m venv venv
+fi
+
+if [[ $1 == "19.0" ]]; then
+  echo "Odoo version is 19.0"
+  echo "Installing python3.13"
+  python3.13 -m venv venv
+fi
 
 source ./venv/bin/activate
 
 python --version
 
 pip install -U pip
-
 pip install --upgrade wheel
-
 pip install --upgrade setuptools
 
 pip install -r requirements.txt
@@ -42,6 +54,9 @@ pip install -r requirements.txt
 # For reports
 pip install rlpycairo
 pip install phonenumbers
+if [[ $1 == "18.0" ]]; then
+  pip install rl-renderPM
+fi
 
 # For hot reload
 pip install watchdog
