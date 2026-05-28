@@ -37,8 +37,8 @@ fi
 
 if [[ $1 == "19.0" ]]; then
   echo "Odoo version is 19.0"
-  echo "Installing python3.13"
-  python3.13 -m venv venv
+  echo "Installing python3.12"
+  python3.12 -m venv venv
 fi
 
 source ./venv/bin/activate
@@ -54,9 +54,7 @@ pip install -r requirements.txt
 # For reports
 pip install rlpycairo
 pip install phonenumbers
-if [[ $1 == "18.0" ]]; then
-  pip install rl-renderPM
-fi
+pip install rl-renderPM
 
 # For hot reload
 pip install watchdog
