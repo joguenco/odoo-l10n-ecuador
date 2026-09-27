@@ -4,7 +4,7 @@
     "category": "Account",
     "author": "Odoo Community Association (OCA), "
     "Carlos Lopez, Renan Nazate, Yazber Romero, Luis Romero, Jorge Quiguango",
-    "website": "https://github.com/OCA/l10n-ecuador",
+    "website": "https://github.com/joguenco/odoo-l10n-ecuador",
     "license": "AGPL-3",
     "version": "19.0.1.0.0",
     "depends": ["account", "account_edi", "l10n_ec", "l10n_ec_base"],

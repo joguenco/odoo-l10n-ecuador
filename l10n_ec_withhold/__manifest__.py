@@ -4,7 +4,7 @@
     "category": "Account",
     "countries": ["ec"],
     "author": "Odoo Community Association (OCA), Odoo-EC",
-    "website": "https://github.com/OCA/l10n-ecuador",
+    "website": "https://github.com/joguenco/odoo-l10n-ecuador",
     "license": "AGPL-3",
     "version": "19.0.1.0.0",
     "depends": ["l10n_ec_base", "l10n_ec_account_edi"],
