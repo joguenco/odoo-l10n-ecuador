@@ -1,0 +1,17 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Odoo: Debug Server",
+            "type": "debugpy",
+            "request": "launch",
+            "program": "${workspaceFolder}/odoo-bin",
+            "console": "integratedTerminal",
+            "args": [
+                "--config=${workspaceFolder}/odoo.conf",
+                "--dev=all"
+            ],
+            "limitTimeReal": 99999
+        }
+    ]
+}
