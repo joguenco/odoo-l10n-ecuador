@@ -343,7 +343,7 @@ class AccountMove(models.Model):
             {
                 "default_partner_id": self.partner_id.id,
                 "default_invoice_id": self.id,
-                "default_issue_date": self.invoice_date,
+                "default_issue_date": fields.Datetime.now(),
             }
         )
         action["context"] = ctx
