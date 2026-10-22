@@ -391,7 +391,7 @@ msgstr "IDENTIFICACIÓN"
 #. module: l10n_ec_withhold
 #: model_terms:ir.ui.view,arch_db:l10n_ec_withhold.e_withhold_document_body
 msgid "Impuesto"
-msgstr "impuestos"
+msgstr "Impuesto"
 
 #. module: l10n_ec_withhold
 #: model:ir.model.fields,field_description:l10n_ec_withhold.field_account_move_line__l10n_ec_invoice_withhold_id
