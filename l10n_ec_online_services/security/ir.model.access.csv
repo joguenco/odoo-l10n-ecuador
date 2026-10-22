@@ -1,0 +1,3 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+l10n_ec_online_services.access_one_version,access_one_version,l10n_ec_online_services.model_one_version,base.group_user,1,0,0,0
+l10n_ec_online_services.access_one_reidi_wizard,access_one_reidi_wizard,l10n_ec_online_services.model_one_reidi_wizard,base.group_user,1,1,1,0

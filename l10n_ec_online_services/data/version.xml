@@ -1,0 +1,5 @@
+<odoo noupdate="1">
+    <record id="version_record" model="one.version">
+        <field name="version">Versions of Odoo Platform</field>
+    </record>
+</odoo>

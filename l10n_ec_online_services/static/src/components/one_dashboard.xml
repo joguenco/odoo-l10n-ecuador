@@ -1,0 +1,18 @@
+<templates xml:space="preserve">
+  <t t-name="owl.OneDashboard" owl="1">
+        <div class="container-fluid p-3">
+            <div class="card mt-3">
+                <div class="card-header">
+                    <h2 t-out="state.title" />
+                </div>
+
+                <div class="card-body">
+                    <p>
+                Online services for Ecuadorian localization
+                </p>
+                    <p class="text-center">&#60;/&#62; with &#x2665; by joguenco</p>
+                </div>
+            </div>
+        </div>
+    </t>
+</templates>

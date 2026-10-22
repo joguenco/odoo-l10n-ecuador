@@ -1,0 +1,51 @@
+<odoo>
+    <menuitem name="Online Services" id="menu_owl_one" sequence="10" />
+
+    <menuitem
+        name="Dashboard"
+        id="menu_owl_one_dashboard"
+        action="action_owl_one_dashboard"
+        parent="menu_owl_one"
+        sequence="10"
+    />
+
+    <menuitem id="menu_one_manage" name="Manage" parent="menu_owl_one" sequence="10">
+        <menuitem
+            id="menu_manage_version"
+            name="Version"
+            action="action_one_version"
+            sequence="10"
+        />
+
+        <menuitem
+            id="menu_manage_reidi"
+            name="Recover Identification"
+            action="action_one_reidi"
+            sequence="20"
+        />
+    </menuitem>
+
+    <menuitem
+        name="Transaction"
+        id="menu_one_transaction"
+        parent="menu_owl_one"
+        sequence="20"
+    />
+
+    <menuitem name="Report" id="menu_one_report" parent="menu_owl_one" sequence="30" />
+
+    <menuitem
+        name="Configuration"
+        id="menu_one_configuration"
+        parent="menu_owl_one"
+        sequence="90"
+    >
+        <menuitem
+            id="menu_one_settings"
+            name="Settings"
+            sequence="10"
+            action="action_one_config_settings"
+            groups="base.group_system"
+        />
+    </menuitem>
+</odoo>
