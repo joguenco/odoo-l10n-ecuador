@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<templates id="template" xml:space="preserve">
+    <t
+        t-name="pos_app.CustomReceiptHeader"
+        t-inherit="point_of_sale.ReceiptHeader"
+        t-inherit-mode="extension"
+    >
+        <xpath expr="//div[hasclass('pos-receipt-contact')]//div" position="before">
+            <div t-if="props.data.company.street" t-esc="props.data.company.street" />
+            <div t-if="props.data.company.city" t-esc="props.data.company.city" />
+        </xpath>
+        <xpath expr="//div[hasclass('pos-receipt-contact')]" position="inside">
+            <t t-set="invoice" t-value="props.data.invoice_id" />
+            <t t-if="invoice">
+                <div>Factura: <t t-out="invoice.name" /></div>
+                <div>Fecha: <t t-out="invoice.invoice_date" /></div>
+                <div>Clave de Acceso: <t t-out="invoice.l10n_ec_xml_access_key" /></div>
+            </t>
+            <t t-set="partner" t-value="props.data.partner" />
+            <t t-if="partner">
+                <div>
+                    <strong>Cliente</strong>
+                </div>
+                <div>Name: <t t-out="partner.name" /></div>
+                <div>Identificación: <t t-out="partner.vat" /></div>
+                <div>Dirección: <t
+                    t-if="partner.contact_address"
+                    t-out="partner.contact_address"
+                /></div>
+                <div>Email: <t t-if="partner.email" t-out="partner.email" /></div>
+            </t>
+        </xpath>
+    </t>
+</templates>
