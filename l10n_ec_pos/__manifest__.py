@@ -5,7 +5,7 @@
     "author": "Odoo Community Association (OCA), " "Jorge Luis",
     "website": "https://github.com/OCA/l10n-ecuador" "https://resolvedor.dev",
     "license": "AGPL-3",
-    "version": "18.0.1.0.0",
+    "version": "19.0.1.0.0",
     "depends": ["point_of_sale", "l10n_ec_account_edi", "l10n_ec_online_services"],
     "data": [
         # 'security/ir.model.access.csv',
