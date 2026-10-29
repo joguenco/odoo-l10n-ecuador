@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Pestaña «Diarios permitidos» en la ficha del usuario (solo la ve el administrador) -->
+    <record id="view_users_form" model="ir.ui.view">
+        <field name="name">res.users.form.inherit.account.restrict.journal</field>
+        <field name="model">res.users</field>
+        <field name="inherit_id" ref="base.view_users_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//page[@name='access_rights']" position="after">
+                <page name="allowed_journals" string="Diarios permitidos" groups="base.group_erp_manager">
+                    <group>
+                        <field name="allowed_journal_ids" widget="many2many_tags" options="{'no_create': True}"/>
+                    </group>
+                    <div class="text-muted">
+                        De cada tipo de diario que elijas (Ventas, Efectivo, Banco…), este usuario
+                        solo podrá usar los elegidos. Los tipos sin ninguno elegido quedan libres.
+                        Vacío: puede usar todos.
+                    </div>
+                </page>
+            </xpath>
+        </field>
+    </record>
+</odoo>
