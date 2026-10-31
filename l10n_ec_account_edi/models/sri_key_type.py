@@ -174,7 +174,7 @@ class SriKeyType(models.Model):
         def new_range():
             return randrange(100000, 999999)
 
-        p12 = self._decode_certificate()
+        private_key, certificate = self._decode_certificate()
         doc = etree.fromstring(xml_string_data)
         signature_id = f"Signature{new_range()}"
         signature_property_id = f"{signature_id}-SignedPropertiesID{new_range()}"
@@ -219,7 +219,12 @@ class SriKeyType(models.Model):
         )
         doc.append(signature)
         ctx = XAdESContext(ImpliedPolicy(xmlsig.constants.TransformSha1))
-        ctx.load_pkcs12(p12)
+        # pyOpenSSL >= 24.1.0 removed OpenSSL.crypto.PKCS12, which xmlsig's
+        # load_pkcs12() still references, so set the signing keys directly
+        # using the cryptography objects returned by _decode_certificate()
+        ctx.private_key = private_key
+        ctx.public_key = certificate.public_key()
+        ctx.x509 = certificate
         ctx.sign(signature)
         ctx.verify(signature)
         return etree.tostring(doc, encoding="UTF-8", pretty_print=True).decode()
